@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Chocohead:Rift:jitpack-SNAPSHOT:dev'
+    implementation 'com.github.Chocohead:Rift:jitpack-aeee80c1fb-1:dev'
 }
 
 ext.configFile = file "build.properties"
