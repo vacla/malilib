@@ -8,8 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import fi.dy.masa.malilib.MaLiLibConfigs;
-import net.minecraft.class_5250;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
 
 public class StringUtils
@@ -76,9 +76,9 @@ public class StringUtils
 
     public static void sendOpenFileChatMessage(net.minecraft.entity.Entity sender, String messageKey, File file)
     {
-        class_5250 name = new net.minecraft.text.LiteralText(file.getName());
-        name.getStyle().setClickEvent(new net.minecraft.text.ClickEvent(net.minecraft.text.ClickEvent.Action.OPEN_FILE, file.getAbsolutePath()));
-        name.method_27692(Formatting.UNDERLINE);
+        LiteralText name = new net.minecraft.text.LiteralText(file.getName());
+        name.getStyle().withClickEvent(new net.minecraft.text.ClickEvent(net.minecraft.text.ClickEvent.Action.OPEN_FILE, file.getAbsolutePath()));
+        name.getStyle().withFormatting(Formatting.UNDERLINE);
         sender.sendSystemMessage(new net.minecraft.text.TranslatableText(messageKey, name));
     }
 
@@ -382,7 +382,7 @@ public class StringUtils
 
     public static int getStringWidth(String text)
     {
-        return net.minecraft.client.MinecraftClient.getInstance().textRenderer.getStringWidth(text);
+        return net.minecraft.client.MinecraftClient.getInstance().textRenderer.getWidth(text);
     }
 
     public static void drawString(int x, int y, int color, String text, MatrixStack matrixStack)
