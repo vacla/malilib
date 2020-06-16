@@ -60,12 +60,12 @@ public class WidgetListStringListEdit extends WidgetListConfigOptionsBase<String
             String defaultValue = config.getDefaultStrings().size() > listIndex ? config.getDefaultStrings().get(listIndex) : "";
 
             return new WidgetStringListEditEntry(x, y, this.browserEntryWidth, this.browserEntryHeight,
-                    listIndex, isOdd, config.getStrings().get(listIndex), defaultValue, this);
+                    listIndex, isOdd, config.getStrings().get(listIndex), defaultValue, this, config.getMaxLength());
         }
         else
         {
             return new WidgetStringListEditEntry(x, y, this.browserEntryWidth, this.browserEntryHeight,
-                    listIndex, isOdd, "", "", this);
+                    listIndex, isOdd, "", "", this, config.getMaxLength());
         }
     }
 }

@@ -12,6 +12,8 @@ import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 
+import javax.annotation.Nullable;
+
 public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
 {
     protected final WidgetListStringListEdit parent;
@@ -20,7 +22,7 @@ public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
     protected final boolean isOdd;
 
     public WidgetStringListEditEntry(int x, int y, int width, int height,
-            int listIndex, boolean isOdd, String initialValue, String defaultValue, WidgetListStringListEdit parent)
+            int listIndex, boolean isOdd, String initialValue, String defaultValue, WidgetListStringListEdit parent, @Nullable int maxLength)
     {
         super(x, y, width, height, parent, initialValue, listIndex);
 
@@ -41,7 +43,7 @@ public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
         if (this.isDummy() == false)
         {
             this.addLabel(x + 2, y + 6, 20, 12, 0xC0C0C0C0, String.format("%3d:", listIndex + 1));
-            bx = this.addTextField(textFieldX, y + 1, resetX, textFieldWidth, 20, initialValue);
+            bx = this.addTextField(textFieldX, y + 1, resetX, textFieldWidth, 20, initialValue, maxLength);
 
             this.addListActionButton(bx, by, ButtonType.ADD);
             bx += bOff;
@@ -80,10 +82,10 @@ public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
         this.addButton(button, listener);
     }
 
-    protected int addTextField(int x, int y, int resetX, int configWidth, int configHeight, String initialValue)
+    protected int addTextField(int x, int y, int resetX, int configWidth, int configHeight, String initialValue, int maxLength)
     {
         GuiTextFieldGeneric field = this.createTextField(x, y + 1, configWidth - 4, configHeight - 3);
-        field.setMaxLength(this.maxTextfieldTextLength);
+        field.setMaxLength(maxLength != 0 ? maxLength : this.maxTextfieldTextLength);
         field.setText(initialValue);
 
         ButtonGeneric resetButton = this.createResetButton(resetX, y, field);

@@ -14,6 +14,13 @@ public class ConfigStringList extends ConfigBase<ConfigStringList> implements IC
 {
     private final ImmutableList<String> defaultValue;
     private final List<String> strings = new ArrayList<>();
+    private int maxLength;
+
+    public ConfigStringList(String name, ImmutableList<String> defaultValue, String comment, int maxLength)
+    {
+        this(name, defaultValue, comment);
+        this.maxLength = maxLength;
+    }
 
     public ConfigStringList(String name, ImmutableList<String> defaultValue, String comment)
     {
@@ -44,6 +51,12 @@ public class ConfigStringList extends ConfigBase<ConfigStringList> implements IC
             this.strings.addAll(strings);
             this.onValueChanged();
         }
+    }
+
+    @Override
+    public int getMaxLength()
+    {
+        return maxLength;
     }
 
     @Override
